@@ -1,12 +1,12 @@
+import 'package:appscyclonebloc/bloc/setting/setting_bloc.dart';
+import 'package:appscyclonebloc/bloc/setting/setting_event.dart';
+import 'package:appscyclonebloc/main.dart';
 import 'package:appscyclonebloc/presentation/widget/countdown_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../bloc/setting/setting_bloc.dart';
-import '../../bloc/setting/setting_event.dart';
 
 class StreamPage extends StatelessWidget {
   const StreamPage({super.key});
@@ -23,6 +23,7 @@ class StreamPage extends StatelessWidget {
             },
             child: Icon(Icons.ac_unit),
           ),
+          SizedBox(width: 30,),
           DropdownButton<Locale>(
               value: context.locale,
               items: const [
@@ -35,14 +36,33 @@ class StreamPage extends StatelessWidget {
               ],
               onChanged: (Locale? newLocale){
                 if(newLocale != null){
-                  context.read<SettingBloc>().add(SwitchLocale(newLocale));
+                  context.setLocale(newLocale);
                 }
-                context.setLocale(newLocale!);
+              }),
+          SizedBox(width: 30,),
 
-              })
+          DropdownButton<ThemeMode>(
+            value: ThemeMode.light, // Dùng giá trị mặc định
+            onChanged: (ThemeMode? newTheme) {
+              if (newTheme != null) {
+                // Gửi sự kiện thay đổi theme
+                context.read<SettingBloc>().add(ChangeAppTheme(newTheme));
+              }
+            },
+            items: const [
+              DropdownMenuItem(
+                value: ThemeMode.light,
+                child: Text('Light Theme'),
+              ),
+              DropdownMenuItem(
+                value: ThemeMode.dark,
+                child: Text('Dark Theme'),
+              ),
+            ],
+          )
         ],
       ),
-      body: const Center(
+      body:  Center(
         child: CountdownWidget(),
       ),
     );

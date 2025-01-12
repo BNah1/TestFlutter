@@ -9,7 +9,7 @@ class SwitchLocale extends SettingEvent{
   SwitchLocale(this.locale);
 }
 
-class SwitchTheme extends SettingEvent{
+class ChangeAppTheme  extends SettingEvent{
   final ThemeMode themeMode;
-  SwitchTheme(this.themeMode);
+  ChangeAppTheme (this.themeMode);
 }

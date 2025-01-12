@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:appscyclonebloc/bloc/setting/setting_bloc.dart';
 import 'package:appscyclonebloc/bloc/setting/setting_state.dart';
+import 'package:appscyclonebloc/main.dart';
 import 'package:appscyclonebloc/presentation/widget/customtextbutton.dart';
 import 'package:appscyclonebloc/utils/stream.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,13 +47,13 @@ class _CountdownWidgetState extends State<CountdownWidget> {
               return Container(
                 child: Text( snapshot.data !=0 ?
                 '$formattedMinutes:$formattedSeconds'
-                    : 'FINISHED!!'
+                    : "end".tr()
                   , // MM:SS
-                  style: TextStyle(fontSize: 60, ),
+                  style: const TextStyle(fontSize: 60, ),
                 ),
               );
             } else {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
           }),
       ComboButtonCountdown(streamTest)

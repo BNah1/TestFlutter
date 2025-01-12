@@ -1,10 +1,7 @@
-import 'package:appscyclonebloc/bloc/setting/setting_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../bloc/setting/setting_event.dart';
 import '../widget/countdown_widget.dart';
 
 class Screentest extends StatelessWidget {
@@ -21,6 +18,7 @@ class Screentest extends StatelessWidget {
             },
             child: Icon(Icons.ac_unit),
           ),
+          SizedBox(width: 30,),
           DropdownButton<Locale>(
             value: context.locale,
               items: const [
@@ -33,13 +31,12 @@ class Screentest extends StatelessWidget {
               ],
               onChanged: (Locale? newLocale){
                 if(newLocale != null){
-                  context.read<SettingBloc>().add(SwitchLocale(newLocale));
                   context.setLocale(newLocale);
                 }
               })
         ],
       ),
-      body: const Center(child: CountdownWidget(),),
+      body: Center(child: CountdownWidget(),),
     );
   }
 }
